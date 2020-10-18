@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 28 15:21:32 2020
+Created on Sun Oct 18 15:44:01 2020
 
 @author: abbme
 """
+# Input x and y is attribute of Point object
+# Returns two lists containing both the x and y coordinates of the hull
+
 class Point: 
     def __init__(self, x, y): 
         self.x = x 
@@ -50,7 +53,9 @@ def convexHull(points, n):
     l = Left_index(points) 
   
     hull = [] 
-      
+    hx = []
+    hy = []
+    
     ''' 
     Start from leftmost point, keep moving counterclockwise  
     until reach the start point again. This loop runs O(h)  
@@ -92,20 +97,25 @@ def convexHull(points, n):
             break
   
     # Print Result  
-    for each in hull: 
-        print(points[each].x, points[each].y) 
+    for each in hull:
+        hx.append(points[each].x)
+        hy.append(points[each].y)
+    return(hx,hy) 
+    
+
   
 # Driver Code 
-points = [] 
-points.append(Point(0, 3)) 
-points.append(Point(2, 2)) 
-points.append(Point(1, 1)) 
-points.append(Point(2, 1)) 
-points.append(Point(3, 0)) 
-points.append(Point(0, 0)) 
-points.append(Point(3, 3)) 
+# points = [] 
+# points.append(Point(0, 3)) 
+# points.append(Point(2, 2)) 
+# points.append(Point(1, 1)) 
+# points.append(Point(2, 1)) 
+# points.append(Point(3, 0)) 
+# points.append(Point(0, 0)) 
+# points.append(Point(3, 3)) 
   
-convexHull(points, len(points)) 
-  
+# hx, hy = convexHull(points, len(points)) 
+# print(hx,hy)
+    
 # This code is contributed by  
 # Akarsh Somani, IIIT Kalyani 
