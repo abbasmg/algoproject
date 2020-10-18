@@ -6,6 +6,7 @@ Created on Sun Oct 18 15:44:01 2020
 """
 # Input x and y is attribute of Point object
 # Returns two lists containing both the x and y coordinates of the hull
+import time
 
 class Point: 
     def __init__(self, x, y): 
@@ -55,7 +56,8 @@ def convexHull(points, n):
     hull = [] 
     hx = []
     hy = []
-    
+    tic = time.clock()
+
     ''' 
     Start from leftmost point, keep moving counterclockwise  
     until reach the start point again. This loop runs O(h)  
@@ -95,7 +97,8 @@ def convexHull(points, n):
         # While we don't come to first point 
         if(p == l): 
             break
-  
+    toc = time.clock()
+    print("Processing time for Jarvis convex hull: " + str(toc-tic) + " seconds")
     # Print Result  
     for each in hull:
         hx.append(points[each].x)
