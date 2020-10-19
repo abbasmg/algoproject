@@ -4,15 +4,18 @@ Created on Sun Oct 18 15:44:01 2020
 
 @author: abbme
 """
+# Have to code from scratch using pseudocode. This example from internet is used to create GUI
+
 # Input x and y is attribute of Point object
 # Returns two lists containing both the x and y coordinates of the hull
 import time
+
 
 class Point: 
     def __init__(self, x, y): 
         self.x = x 
         self.y = y 
-  
+
 def Left_index(points): 
       
     ''' 
@@ -54,8 +57,8 @@ def convexHull(points, n):
     l = Left_index(points) 
   
     hull = [] 
-    hx = []
-    hy = []
+    # hx = []
+    # hy = []
     tic = time.clock()
 
     ''' 
@@ -100,14 +103,14 @@ def convexHull(points, n):
     toc = time.clock()
     print("Processing time for Jarvis convex hull: " + str(toc-tic) + " seconds")
     # Print Result  
-    for each in hull:
-        hx.append(points[each].x)
-        hy.append(points[each].y)
-    return(hx,hy) 
+    # for each in hull:
+    #     hx.append(points[each].x)
+    #     hy.append(points[each].y)
+    return(hull) 
     
 
   
-# Driver Code 
+# # Driver Code 
 # points = [] 
 # points.append(Point(0, 3)) 
 # points.append(Point(2, 2)) 
