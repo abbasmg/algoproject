@@ -8,7 +8,10 @@ Created on Sun Oct 18 16:10:26 2020
 from tkinter import *
 import jarvis as j
 import brute as b
+import random
 
+
+    
 points = []
 lines = []
 canvas = None
@@ -32,6 +35,17 @@ def clear_canvas(e):
 def clear_lines(e):
     canvas.delete("line")
     lines.clear()
+
+def random_points(e):
+    randomx = []
+    randomy = []
+    for i in range(0, 100):
+        # any random numbers from 0 to 1000
+        randomx.append(random.randint(100,900))
+        randomy.append(random.randint(100,500))
+        x,y = randomx[i], randomy[i]
+        points.append(Point(x, y))
+        canvas.create_rectangle(x-1, y-1, x + 1, y + 1, fill="#6F0D5F")
     
 def brute(e):
     er = display_error()
@@ -67,9 +81,13 @@ def display_error():
 frame = Frame(None, bg='grey', height=2)
 frame.pack()
 
-canvas = Canvas(frame, width="600", height="600")
+canvas = Canvas(frame, width="1000", height="600")
 canvas.pack(fill=BOTH, expand=1)
 canvas.bind('<Button-1>', callback)
+
+pbutton = Button(frame, text="Gen-points")
+pbutton.pack(side='left', padx=10)
+pbutton.bind('<Button-1>', random_points)
 
 bbutton = Button(frame, text="Brute")
 bbutton.pack(side='left', padx=10)
