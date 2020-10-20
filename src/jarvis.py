@@ -59,7 +59,7 @@ def convexHull(points, n):
     hull = [] 
     # hx = []
     # hy = []
-    tic = time.clock()
+    tic = time.perf_counter()
 
     ''' 
     Start from leftmost point, keep moving counterclockwise  
@@ -100,7 +100,7 @@ def convexHull(points, n):
         # While we don't come to first point 
         if(p == l): 
             break
-    toc = time.clock()
+    toc = time.perf_counter()
     print("Processing time for Jarvis convex hull: " + str(toc-tic) + " seconds")
     # Print Result  
     # for each in hull:
