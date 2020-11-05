@@ -6,6 +6,7 @@ Created on Sun Oct 18 16:10:26 2020
 """
 
 from tkinter import *
+from Coord import Point
 import jarvis as j
 import brute as b
 import random
@@ -17,10 +18,7 @@ lines = []
 canvas = None
 frame = None
 
-class Point: 
-    def __init__(self, x, y): 
-        self.x = x 
-        self.y = y 
+
 
 def callback(event):
     x, y = event.x, event.y
@@ -52,7 +50,7 @@ def brute(e):
     if er == "er":
         clear_canvas(e)
         raise Exception("Error")
-    h1,h2 = b.convexHull(points, len(points))
+    h1,h2 = b.ConvexHull(points, len(points))
     n = len(h1)
     for i in range(n):
         canvas.create_line(points[h1[i]].x, points[h1[i]].y, points[h2[i]].x, points[h2[i]].y, tag ="line")
@@ -62,7 +60,7 @@ def jarvis(e):
     if er == "er":
         clear_canvas(e)
         raise Exception("Error")        
-    hull = j.convexHull(points, len(points))
+    hull = j.ConvexHull(points, len(points))
     # Created two more list to improve readability
     hx = []
     hy = []

@@ -33,12 +33,12 @@ def inhull(points,i,j,n):
     else:
         return 0
 
-def convexHull(points,n):
+def ConvexHull(points,n):
     h1 = []
     h2 = []
     if n < 3: 
         return
-    tic = time.clock()
+    tic = time.perf_counter()
     for i in range(n):
         for j in range(i,n):
             # print(i,j)
@@ -47,7 +47,7 @@ def convexHull(points,n):
                 # print(c)
                 h1.append(i)
                 h2.append(j)
-    toc = time.clock()
+    toc = time.perf_counter()
     print("Processing time for Brute Force convex hull: " + str(toc-tic) + " seconds")
     return h1,h2
 
