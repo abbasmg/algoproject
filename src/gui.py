@@ -24,7 +24,11 @@ def callback(event):
     x, y = event.x, event.y
     points.append(Point(x, y))
     canvas.create_rectangle(x-1, y-1, x + 1, y + 1, fill="#6F0D5F")
- 
+
+# def insert_manual_point(x,y):
+#     points.append(Point(x,y))
+#     canvas.create_rectangle(x-1, y-1, x + 1, y + 1, fill="#6F0D5F")
+    
 # Clears everything
 def clear_canvas(e):
     canvas.delete("all")
@@ -83,7 +87,7 @@ def del_points(e):
 
 # To be used for the divide and conquer method of convex hull. Not done yet
 def sort_points(e):
-    quicksort(points,0,len(points)-1)
+    sort_xy(points,len(points)-1)
 
 # display error if less than 3 points
 def display_error():
@@ -134,4 +138,5 @@ dbutton.bind('<Button-1>', display_points)
 
 frame.mainloop()
 
-
+# insert_manual_point(445,102)
+# insert_manual_point(445,110)

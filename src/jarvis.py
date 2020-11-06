@@ -28,7 +28,7 @@ def convex_hull(points,n):
     first = l
     while(True):
         hull.append(l)
-        # Select the point after l in the list
+        # Select the point after l in the list until we reach the first point
         r = (l + 1)%n
         for i in range(n):
             # Check if points l->i->r turn right and if they do
