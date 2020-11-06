@@ -13,7 +13,7 @@ Created on Mon Oct 19 14:25:53 2020
 #         self.y = y 
 
 import time
-        
+# Returns 1 if a pair of points are a part of convex hull       
 def inhull(points,i,j,n):
     p_above = 0
     p_below = 0
@@ -22,6 +22,7 @@ def inhull(points,i,j,n):
     b = x1-x2
     c = (x1*y2-x2*y1)/1.0
     for p in range(n):
+        # Check if all points lie below or above the pair
         if(i!=p and j!=p):
             if(a*points[p].x + b*points[p].y - c < 0):
                 # print(a*points[p].x + b*points[p].y - c) 
@@ -33,7 +34,7 @@ def inhull(points,i,j,n):
     else:
         return 0
 
-def ConvexHull(points,n):
+def convex_hull(points,n):
     h1 = []
     h2 = []
     if n < 3: 

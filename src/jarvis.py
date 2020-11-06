@@ -8,9 +8,9 @@ Created on Sun Oct 18 15:44:01 2020
 # Input x and y is attribute of Point object
 # Returns two lists containing both the x and y coordinates of the hull
 import time
-from Coord import Point
+from Coord import Point 
 
-def Leftmost(points,n): 
+def leftmost(points,n): 
     # Returns index of the first leftmost point in points list
     minx = points[0].x
     minind = 0
@@ -20,11 +20,11 @@ def Leftmost(points,n):
             minind = i
     return minind
     
-def ConvexHull(points,n):
+def convex_hull(points,n):
     # Generate convex hull using jarvis algorithm
     tic = time.perf_counter()
     hull = []
-    l = Leftmost(points, n)
+    l = leftmost(points, n)
     first = l
     while(True):
         hull.append(l)
