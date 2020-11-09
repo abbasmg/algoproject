@@ -11,7 +11,6 @@ import brute as b
 import random
 
 
-    
 points = []
 lines = []
 canvas = None
@@ -39,7 +38,7 @@ def clear_lines(e):
 def random_points(e):
     randomx = []
     randomy = []
-    for i in range(0, 100):
+    for i in range(0, 99):
         # any random numbers from 0 to 1000
         randomx.append(random.randint(100,900))
         randomy.append(random.randint(100,500))
