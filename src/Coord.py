@@ -10,22 +10,43 @@ class Point:
     def __init__(self, x, y): 
         self.x = x 
         self.y = y 
- 
-    def vector(self,p):
-        return Point(self.x - p.x, self.y - p.y)        
-
-    def direction(points,i, j, k):
-        # Returns direction of three points
-        # create vectors
-        v1 = points[j].vector(points[i])
-        v2 = points[k].vector(points[i])        
+     
+    def direction(self, pj, pk):
+        # Returns direction of three points        
         # Get cross product of vectors to get direction
-        d = v1.x*v2.y - v2.x*v1.y
-        # d > 0 : points turn left, d < 0 : points turn right, d = 0 points collinear
+        x1,x2,x3 = self.x,pj.x,pk.x
+        y1,y2,y3 = self.y,pj.y,pk.y
+        d = (x2-x1)*(y3-y1)-(y2-y1)*(x3-x1)
         return d
+        # d > 0 : points turn left, d < 0 : points turn right, d = 0 points collinear
+        # if d < 0:
+        #     return -1
+        # if d > 0:
+        #     return 1
+        # if d == 0:
+        #     return -1
+        # else:
+        #     return 1
+        
+    def direction_graham(self, pj, pk):
+        # Returns direction of three points        
+        # Get cross product of vectors to get direction
+        x1,x2,x3 = self.x,pj.x,pk.x
+        y1,y2,y3 = self.y,pj.y,pk.y
+        d = (x2-x1)*(y3-y1)-(y2-y1)*(x3-x1)
+        # d > 0 : points turn left, d < 0 : points turn right, d = 0 points collinear
+        if d < 0:
+            return -1
+        if d > 0:
+            return 1
+        if d == 0:
+            return -1
+        else:
+            return 1    
+    
     def __str__(self):
         return "x: " + str(self.x) + " y: " + str(self.y) + "\n"
-
+    
 
     
 def pivot_partition(points,low,high,by="x"):
@@ -68,21 +89,21 @@ def quicksort(points,low,high,by):
 
 def sort_xy(points,n):
     points = quicksort(points,0,n,by="x")
-    for each in points:
-        print(each)
+    # for each in points:
+    #     print(each)
     for i in range(0,n):
         if points[i].x == points[i+1].x:
             samef = i
-            for j in range(i+1,n+2):
-                #print(i,j)
+            for j in range(i+1,n+1):
+                # print(i,j)
                 # 4,5, 6
                 if points[j].x == points[i].x:
                     samel = j
                 else:
                     i = j
                     break
-            print(samef,samel)
-            print("it")
+            # print(samef,samel)
+            # print("it")
             points = quicksort(points,samef,samel,by="y")
     return points
             

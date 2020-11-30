@@ -33,7 +33,7 @@ def convex_hull(points,n):
         for i in range(n):
             # Check if points l->i->r turn right and if they do
             # make i the new leftmost point
-            if Point.direction(points,l,i,r) < 0:
+            if points[l].direction(points[i],points[r]) < 0:
                 r = i
         # The new leftmost point is added to the hull
         l = r
@@ -41,7 +41,7 @@ def convex_hull(points,n):
         if l == first:
             break
     toc = time.perf_counter()
-    print("Processing time for Brute Force convex hull: " + str(toc-tic) + " seconds")
+    print("Processing time for Jarvis convex hull: " + str(toc-tic) + " seconds")
     return hull
         
     

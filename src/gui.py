@@ -8,7 +8,9 @@ Created on Sun Oct 18 16:10:26 2020
 from tkinter import *
 from Coord import *
 import jarvis as j
+import graham as g
 import brute as b
+import dandc as d
 import random
 
 
@@ -17,12 +19,12 @@ points = []
 lines = []
 canvas = None
 frame = None
-
-
+height = 600
+width = 1000
 
 def callback(event):
     x, y = event.x, event.y
-    points.append(Point(x, y))
+    points.append(Point(x, (height-y)))
     canvas.create_rectangle(x-1, y-1, x + 1, y + 1, fill="#6F0D5F")
 
 # def insert_manual_point(x,y):
@@ -46,10 +48,10 @@ def random_points(e):
     randomy = []
     for i in range(0, 100):
         # any random numbers from 0 to 1000
-        randomx.append(random.randint(100,900))
-        randomy.append(random.randint(100,500))
+        randomx.append(random.randint(100,width-100))
+        randomy.append(random.randint(100,height-100))
         x,y = randomx[i], randomy[i]
-        points.append(Point(x, y))
+        points.append(Point(x, height-y))
         canvas.create_rectangle(x-1, y-1, x + 1, y + 1, fill="#6F0D5F")
 
 # Brute force method for convex hull    
@@ -60,7 +62,7 @@ def brute(e):
     h1,h2 = b.convex_hull(points, len(points))
     n = len(h1)
     for i in range(n):
-        canvas.create_line(points[h1[i]].x, points[h1[i]].y, points[h2[i]].x, points[h2[i]].y, tag ="line")
+        canvas.create_line(points[h1[i]].x,height - points[h1[i]].y, points[h2[i]].x,height - points[h2[i]].y, tag ="line")
 
 # Jarvis method of convex hull    
 def jarvis(e):
@@ -73,10 +75,45 @@ def jarvis(e):
     hy = []
     for each in hull:
         hx.append(points[each].x)
-        hy.append(points[each].y)
+        hy.append(height-points[each].y)
     n = len(hx)
     for i in range(n):
         canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
+        
+# Jarvis method of convex hull    
+def graham(e):
+    if display_error() == "er":
+        clear_canvas(e)
+        raise Exception("Error")   
+    hull = g.convex_hull(points)
+    print(hull)
+    # Created two more list to improve readability
+    hx = []
+    hy = []
+    for each in hull:
+        hx.append(points[each].x)
+        hy.append(height-points[each].y)
+    n = len(hx)
+    for i in range(n):
+        canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
+        
+        
+        
+def divide(e):
+    hulls = d.convexHull(points,len(points),4)
+    #print(hulls)
+    if (hulls=="Error"):
+        MsgBox = messagebox.showerror("Error", "Put atleast 3 points")
+        return "er"
+    for every in hulls:
+        hx = []
+        hy = []
+        for each in every:
+            hx.append(each.x)
+            hy.append(height-each.y)
+        n = len(hx)
+        for i in range(n):
+            canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
 
 # To be used when we implement the preprossesing step of creating
 # convex quadrilateral and deleting points within. Not done yet
@@ -100,11 +137,13 @@ def display_points(e):
     for each in points:
         print(each)
 
-        
-frame = Frame(None, bg='grey', height=2)
+
+root = Tk()     
+   
+frame = Frame(root, bg='grey', height=2)
 frame.pack()
 
-canvas = Canvas(frame, width="1000", height="600")
+canvas = Canvas(frame, width=width, height=height)
 canvas.pack(fill=BOTH, expand=1)
 canvas.bind('<Button-1>', callback)
 
@@ -123,6 +162,14 @@ bbutton.bind('<Button-1>', brute)
 jbutton = Button(frame, text="Jarvis")
 jbutton.pack(side='left', padx=10)
 jbutton.bind('<Button-1>', jarvis)
+
+gbutton = Button(frame, text="Graham")
+gbutton.pack(side='left', padx=10)
+gbutton.bind('<Button-1>', graham)
+
+dcbutton = Button(frame, text="Divide")
+dcbutton.pack(side='left', padx=10)
+dcbutton.bind('<Button-1>', divide)
 
 clearlines = Button(frame, text = "c-lines")
 clearlines.pack(side = 'left', padx=10)
