@@ -12,7 +12,7 @@ import graham as g
 import brute as b
 import dandc as d
 import random
-
+import time
 
     
 points = []
@@ -100,7 +100,7 @@ def graham(e):
         
         
 def divide(e):
-    hulls = d.convexHull(points,len(points),4)
+    hulls,time1 = d.convex_hull(points,len(points),8)
     #print(hulls)
     if (hulls=="Error"):
         MsgBox = messagebox.showerror("Error", "Put atleast 3 points")
@@ -113,7 +113,25 @@ def divide(e):
             hy.append(height-each.y)
         n = len(hx)
         for i in range(n):
-            canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
+            canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line",fill = "red")
+    #ul,ur,ll,lr = d.mergec(hulls)
+    newhull, time2 = d.conquer(hulls)
+    print("Processing time for D&C convex hull: " + str(time1+time2) + " seconds")
+    nhx = []
+    nhy = []
+    for j,l in enumerate(newhull):
+        for i in l:
+            nhx.append(i.x)
+            nhy.append(height-i.y)
+    n = len(nhx)
+    for i in range(n):
+        canvas.create_line(nhx[i%n], nhy[i%n], nhx[(i+1)%n], nhy[(i+1)%n], tag ="line")
+    # canvas.create_line(ul.x, height-ul.y, ur.x, height-ur.y, tag ="line",fill = "blue")
+    # canvas.create_line(ll.x, height-ll.y, lr.x, height-lr.y, tag ="line",fill= "blue")
+   
+            
+            
+    
 
 # To be used when we implement the preprossesing step of creating
 # convex quadrilateral and deleting points within. Not done yet

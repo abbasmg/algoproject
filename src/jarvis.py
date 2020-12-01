@@ -8,17 +8,10 @@ Created on Sun Oct 18 15:44:01 2020
 # Input x and y is attribute of Point object
 # Returns two lists containing both the x and y coordinates of the hull
 import time
-from Coord import Point 
+from Coord import Point,leftmost 
 
-def leftmost(points,n): 
-    # Returns index of the first leftmost point in points list
-    minx = points[0].x
-    minind = 0
-    for i in range(n):
-        if minx > points[i].x:
-            minx = points[i].x
-            minind = i
-    return minind
+# https://en.wikipedia.org/wiki/Gift_wrapping_algorithm
+
     
 def convex_hull(points,n):
     # Generate convex hull using jarvis algorithm
@@ -33,7 +26,7 @@ def convex_hull(points,n):
         for i in range(n):
             # Check if points l->i->r turn right and if they do
             # make i the new leftmost point
-            if points[l].direction(points[i],points[r]) < 0:
+            if r == l or points[l].direction(points[i],points[r]) < 0:
                 r = i
         # The new leftmost point is added to the hull
         l = r
@@ -49,14 +42,24 @@ def convex_hull(points,n):
 
 
 
-# h = ConvexHull(points, len(points))
+
 
 # for i in h:
 #     print(points[i].x,points[i].y)
 
-# points.append(Point(0, 0)) 
-# points.append(Point(7, 0)) 
-# points.append(Point(3, 3)) 
-# direction(0,1,2)
-# print(points[Leftmost(points,len(points))].y)  
 
+# points = [] 
+# points.append(Point(0, 3)) 
+# points.append(Point(2, 2)) 
+# points.append(Point(1, 1)) 
+# points.append(Point(2, 1)) 
+# points.append(Point(3, 3)) 
+# points.append(Point(0, 0)) 
+# points.append(Point(3, 0))          
+# points.append(Point(5, 1)) 
+# points.append(Point(7, 4)) 
+# points.append(Point(2, 9)) 
+
+# h = convex_hull(points, len(points))
+# for i in h:
+#     print(points[i])

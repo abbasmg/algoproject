@@ -97,8 +97,8 @@ def convex_hull(points):
     for i in range(2,len(points)):
         while i<len(points):
             direction = convex_hull[m-2].direction(convex_hull[m-1],points[i])
-            print("Iteration:"+str(i-1))
-            print("direction:"+str(direction))
+            # print("Iteration:"+str(i-1))
+            # print("direction:"+str(direction))
             if direction <= 0:
                 #pop stack
                 convex_hull.pop()
@@ -108,25 +108,25 @@ def convex_hull(points):
         convex_hull.append(points[i])
 
         m += 1
-        for j,point in enumerate(convex_hull):
-            print(point)
+        # for j,point in enumerate(convex_hull):
+        #     print(point)
         
     return convex_hull  # This needs to be an index of points
 
 
 
-points = []
+# points = []
 
 
-points.append(Point(0, 3)) 
-points.append(Point(2, 2)) 
-points.append(Point(1, 1)) 
-points.append(Point(2, 1)) 
-points.append(Point(3, 0)) 
-points.append(Point(0, 0)) 
-points.append(Point(3, 3)) 
+# points.append(Point(0, 3)) 
+# points.append(Point(2, 2)) 
+# points.append(Point(1, 1)) 
+# points.append(Point(2, 1)) 
+# points.append(Point(3, 0)) 
+# points.append(Point(0, 0)) 
+# points.append(Point(3, 3)) 
 
-convex_hull(points)
+# convex_hull(points)
 
 
 

@@ -32,8 +32,34 @@ class Point:
     def __str__(self):
         return "x: " + str(self.x) + " y: " + str(self.y) + "\n"
     
+def leftmost(points,n): 
+    # Returns index of the first leftmost and lowest point in points list
+    minx = points[0]
+    minind = 0
+    for i in range(n):
+        if minx.x > points[i].x:
+            minx = points[i]
+            minind = i
+        elif minx.x == points[i].x:
+            if minx.y > points[i].y:
+                minx = points[i]
+                minind = i
+    return minind
 
-    
+def rightmost(points,n): 
+    # Returns index of the first rightmost and lowest point in points list
+    minx = points[0]
+    minind = 0
+    for i in range(n):
+        if minx.x < points[i].x:
+            minx = points[i]
+            minind = i
+        elif minx.x == points[i].x:
+            if minx.y > points[i].y:
+                minx = points[i]
+                minind = i
+    return minind    
+   
 def pivot_partition(points,low,high,by="x"):
     # Set pivot elemnt and index.
     pi = low
