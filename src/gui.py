@@ -11,6 +11,7 @@ import jarvis as j
 import graham as g
 import brute as b
 import dandc as d
+import poly as p
 import random
 import time
 
@@ -129,8 +130,25 @@ def divide(e):
     # canvas.create_line(ul.x, height-ul.y, ur.x, height-ur.y, tag ="line",fill = "blue")
     # canvas.create_line(ll.x, height-ll.y, lr.x, height-lr.y, tag ="line",fill= "blue")
    
-            
-            
+def polygon(e):
+    q = p.convex_poly(points)        
+    hpx = []
+    hpy = []
+    for each in points:
+        hpx.append(each.x)
+        hpy.append(height-each.y)
+    n = len(hpx)
+    for i in range(n):
+        canvas.create_line(hpx[i%n], hpy[i%n], hpx[(i+1)%n], hpy[(i+1)%n], tag ="line", fill="red")
+                      
+    hx = []
+    hy = []
+    for each in q:
+        hx.append(each.x)
+        hy.append(height-each.y)
+    n = len(hx)
+    for i in range(n):
+        canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
     
 
 # To be used when we implement the preprossesing step of creating
@@ -185,9 +203,13 @@ gbutton = Button(frame, text="Graham")
 gbutton.pack(side='left', padx=10)
 gbutton.bind('<Button-1>', graham)
 
-dcbutton = Button(frame, text="Divide")
+dcbutton = Button(frame, text="D&C")
 dcbutton.pack(side='left', padx=10)
 dcbutton.bind('<Button-1>', divide)
+
+cpbutton = Button(frame, text="C-Polygon")
+cpbutton.pack(side='left', padx=10)
+cpbutton.bind('<Button-1>', polygon)
 
 clearlines = Button(frame, text = "c-lines")
 clearlines.pack(side = 'left', padx=10)
