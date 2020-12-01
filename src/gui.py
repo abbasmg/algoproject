@@ -80,23 +80,21 @@ def jarvis(e):
     for i in range(n):
         canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
         
-# Jarvis method of convex hull    
+# Graham method of convex hull    
 def graham(e):
     if display_error() == "er":
         clear_canvas(e)
         raise Exception("Error")   
     hull = g.convex_hull(points)
-    print(hull)
     # Created two more list to improve readability
     hx = []
     hy = []
-    for each in hull:
-        hx.append(points[each].x)
-        hy.append(height-points[each].y)
+    for each, point in enumerate(hull):
+        hx.append(point.x)
+        hy.append(height-point.y)
     n = len(hx)
     for i in range(n):
         canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
-        
         
         
 def divide(e):

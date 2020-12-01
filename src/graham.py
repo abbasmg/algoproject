@@ -29,7 +29,6 @@ def lowest_y(points):
     miny = points[0].y
     minind = 0
     for i, point in enumerate(points):
-        #print(i,point)
         if point.y < miny:
             miny = point.y
             minind = i
@@ -53,15 +52,16 @@ def polar_angle_sort(points,p0):
         #keeping index to find initial points
         sorted_angle[i] = math.atan2(vec_y, vec_x) 
         #if we find colinear vectors, we calculate lenght and choose farthest
-        if sorted_angle.get(i) == sorted_angle.get(i-1):
-            d1=math.sqrt(points[i-1].x**2 + points[i-1].y**2)
-            d2=math.sqrt(points[i].x**2 + points[i].y**2)
-            indice_p1=i-1
-            indice_p2=i
-            if d1>d2:
-                sorted_angle.pop(indice_p2)
-            else:
-                sorted_angle.pop(indice_p1)
+        if i >= 1:
+            if sorted_angle.get(i) == sorted_angle.get(i-1):
+                d1=math.sqrt(points[i-1].x**2 + points[i-1].y**2)
+                d2=math.sqrt(points[i].x**2 + points[i].y**2)
+                indice_p1=i-1
+                indice_p2=i
+                if d1>d2:
+                    sorted_angle.pop(indice_p2)
+                elif d1<=d2:
+                    sorted_angle.pop(indice_p1)
 
     #sort angles (gives a list)
     sorted_angle=sorted(sorted_angle.items(), key=lambda x: x[1], reverse=False)
@@ -73,7 +73,7 @@ def polar_angle_sort(points,p0):
     #sort points with sorted index
     for i,index in enumerate(sorted_index):
         sorted_points.append(points[index])
-    
+
     return sorted_points
 
 """
@@ -85,48 +85,46 @@ def polar_angle_sort(points,p0):
 end
 """
 def convex_hull(points):
-    p0,min_id = lowest_y(points)
+    tic = time.perf_counter()
+    p0, minind = lowest_y(points)
     points = polar_angle_sort(points,p0)
     convex_hull = []
     convex_ind = []
     
     #P0 and the first point in the sorted list are automatically in the convex hull
     convex_hull.append(p0)
+    convex_hull.append(points[0])
     convex_hull.append(points[1])
-    m = 2
+    convex_ind.append(minind)
+    
+    m = 3
     for i in range(2,len(points)):
-        while i<len(points):
+        while True:
             direction = convex_hull[m-2].direction(convex_hull[m-1],points[i])
-            # print("Iteration:"+str(i-1))
-            # print("direction:"+str(direction))
-            if direction <= 0:
-                #pop stack
+            if direction > 0:
+                break
+            else:
                 convex_hull.pop()
                 m -= 1
-            else:
-                break
         convex_hull.append(points[i])
-
         m += 1
-        # for j,point in enumerate(convex_hull):
-        #     print(point)
-        
+    
+
+    toc = time.perf_counter()
+    print("Processing time for Graham scan convex hull: " + str(toc-tic) + " seconds")
     return convex_hull  # This needs to be an index of points
 
 
-
-# points = []
-
-
-# points.append(Point(0, 3)) 
-# points.append(Point(2, 2)) 
-# points.append(Point(1, 1)) 
-# points.append(Point(2, 1)) 
-# points.append(Point(3, 0)) 
-# points.append(Point(0, 0)) 
-# points.append(Point(3, 3)) 
-
-# convex_hull(points)
+#points = [] 
+#points.append(Point(0, 3)) 
+#points.append(Point(2, 2)) 
+#points.append(Point(1, 1)) 
+#points.append(Point(2, 1)) 
+#points.append(Point(3, 3)) 
+#points.append(Point(0, 0)) 
+#points.append(Point(3, 0))          
 
 
 
+
+#print(convex_hull(points))
