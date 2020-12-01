@@ -19,7 +19,6 @@ def isleft(points,L,x):
     if xp > 0:
         return False
 
-
 def convex_poly(points):
     q = []
     L = []
@@ -34,28 +33,30 @@ def convex_poly(points):
     q.append(points[x])
     t = t + 1
     y = x-1
-    
+    n = len(points)
     while True:
-        x = x + 1
-        if x == len(points):
+        x = (x + 1)%n
+        if x==1:
             break
         if q[t-1].direction(q[t],points[x]) >= 0:
             if points[y].direction(q[t],points[x]) < 0:
+                print(points[y],q[t],points[x])
                 L.append([q[t-1],q[t]])
             else:
+                print('h')
                 L.append([q[t],q[0]])
             while isleft(points,L,x):
-                x = x + 1
-                if x == len(points):
+                x = (x + 1)%n
+                if x == 1:
                     break
         if x == len(points):
-            break
+            x=0
         while q[t-1].direction(q[t],points[x]) > 0:
             q.pop()
             t = t-1
         q.append(points[x])
         t = t+1
-        y = x-1
+        y = (x-1)%n
     return q
 
 
@@ -72,7 +73,7 @@ def convex_poly(points):
 # points.append(Point(4, 4)) 
 # points.append(Point(6, 4)) 
 # points.append(Point(5, 3)) 
-# points.append(Point(6, 2)) 
+
 
 # q = convex_poly(points)
 
