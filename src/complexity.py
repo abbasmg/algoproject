@@ -26,7 +26,7 @@ def time_complexity(k):
     for i in range(5,k+5):
         n.append(i)
         random_points(points, i)
-        print(i)
+        print(i-4)
         # Brute
         tic = time.perf_counter()
         b.convex_hull(points, len(points))
@@ -49,6 +49,39 @@ def time_complexity(k):
 
 
 
-n, times_brute, times_jarvis, times_graham = time_complexity(10)
+n, times_brute, times_jarvis, times_graham = time_complexity(20)
 
-print(n)
+
+# Plot brute algo
+fig, ax = plt.subplots()
+ax.plot(n,times_brute)
+
+ax.set(xlabel='Time required', ylabel='No. of elements',
+       title='Brute algo time complexity')
+ax.grid()
+
+fig.savefig("brute.png")
+plt.show()
+
+# Plot Jarvis algo
+fig, ax = plt.subplots()
+ax.plot(n,times_jarvis)
+
+ax.set(xlabel='Time required', ylabel='No. of elements',
+       title='Jarvis algo time complexity')
+ax.grid()
+
+fig.savefig("jarvis.png")
+plt.show()
+
+
+# Plot Graham algo
+fig, ax = plt.subplots()
+ax.plot(n,times_graham)
+
+ax.set(xlabel='Time required', ylabel='No. of elements',
+       title='Graham algo time complexity')
+ax.grid()
+
+fig.savefig("graham.png")
+plt.show()
