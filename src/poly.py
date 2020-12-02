@@ -28,8 +28,10 @@ def convex_poly(points):
     t = 1
     x = 2
     while (q[t-1].direction(q[t],points[x]) > 0):
-        print(x)
+        #print(x)
         x = x + 1
+        if x == 2:
+            break
     q.append(points[x])
     t = t + 1
     y = x-1
