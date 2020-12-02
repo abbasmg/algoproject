@@ -36,7 +36,7 @@ def convex_poly(points):
     n = len(points)
     while True:
         x = (x + 1)%n
-        if x==1:
+        if x==2:
             break
         if q[t-1].direction(q[t],points[x]) >= 0:
             if points[y].direction(q[t],points[x]) < 0:
@@ -47,10 +47,10 @@ def convex_poly(points):
                 L.append([q[t],q[0]])
             while isleft(points,L,x):
                 x = (x + 1)%n
-                if x == 1:
+                if x == 2:
                     break
-        if x == len(points):
-            x=0
+        if x == 2:
+            break
         while q[t-1].direction(q[t],points[x]) > 0:
             q.pop()
             t = t-1

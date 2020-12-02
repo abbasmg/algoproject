@@ -132,15 +132,7 @@ def divide(e):
    
 def polygon(e):
     q = p.convex_poly(points)        
-    hpx = []
-    hpy = []
-    for each in points:
-        hpx.append(each.x)
-        hpy.append(height-each.y)
-    n = len(hpx)
-    for i in range(n):
-        canvas.create_line(hpx[i%n], hpy[i%n], hpx[(i+1)%n], hpy[(i+1)%n], tag ="line", fill="red")
-                      
+                         
     hx = []
     hy = []
     for each in q:
@@ -149,7 +141,15 @@ def polygon(e):
     n = len(hx)
     for i in range(n):
         canvas.create_line(hx[i%n], hy[i%n], hx[(i+1)%n], hy[(i+1)%n], tag ="line")
-    
+    hpx = []
+    hpy = []
+    for each in points:
+        hpx.append(each.x)
+        hpy.append(height-each.y)
+    n = len(hpx)
+    for i in range(n):
+        canvas.create_line(hpx[i%n], hpy[i%n], hpx[(i+1)%n], hpy[(i+1)%n], tag ="line", fill="red")
+ 
 
 # To be used when we implement the preprossesing step of creating
 # convex quadrilateral and deleting points within. Not done yet
