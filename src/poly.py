@@ -6,7 +6,7 @@ Created on Tue Dec  1 02:12:31 2020
 """
 
 from Coord import *
-
+from time import perf_counter
 
 
 
@@ -20,6 +20,7 @@ def isleft(points,L,x):
         return False
 
 def convex_poly(points):
+    tic = perf_counter()
     q = []
     L = []
     q.append(points[0])
@@ -40,12 +41,12 @@ def convex_poly(points):
         x = (x + 1)%n
         if x==2:
             break
-        if q[t-1].direction(q[t],points[x]) >= 0:
-            if points[y].direction(q[t],points[x]) < 0:
-                print(points[y],q[t],points[x])
+        if q[t-1].direction(q[t],points[x]) <= 0:
+            if points[y].direction(q[t],points[x]) > 0:
+                #print(points[y],q[t],points[x])
                 L.append([q[t-1],q[t]])
             else:
-                print('h')
+                #print('h')
                 L.append([q[t],q[0]])
             while isleft(points,L,x):
                 x = (x + 1)%n
@@ -59,6 +60,8 @@ def convex_poly(points):
         q.append(points[x])
         t = t+1
         y = (x-1)%n
+    toc = perf_counter()
+    print("Processing time for Convex hull of a polygon: " + str(toc-tic) + " seconds")
     return q
 
 

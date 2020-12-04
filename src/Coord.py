@@ -18,7 +18,7 @@ class Point:
         y1,y2,y3 = self.y,pj.y,pk.y
         d = (x2-x1)*(y3-y1)-(y2-y1)*(x3-x1)
         return d
-        # d > 0 : points turn left, d < 0 : points turn right, d = 0 points collinear
+        # d < 0 : points turn left, d > 0 : points turn right, d = 0 points collinear
         # if d < 0:
         #     return -1
         # if d > 0:
