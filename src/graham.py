@@ -120,16 +120,16 @@ def convex_hull(points):
     return convex_hull  # This needs to be an index of points
 
 
-points = [] 
-points.append(Point(0, 3)) 
-points.append(Point(2, 2)) 
-points.append(Point(1, 1)) 
-points.append(Point(2, 1)) 
-points.append(Point(3, 3)) 
-points.append(Point(0, 0)) 
-points.append(Point(3, 0))     
+# points = [] 
+# points.append(Point(0, 3)) 
+# points.append(Point(2, 2)) 
+# points.append(Point(1, 1)) 
+# points.append(Point(2, 1)) 
+# points.append(Point(3, 3)) 
+# points.append(Point(0, 0)) 
+# points.append(Point(3, 0))     
 
 
 
 
-print(convex_hull(points))
+# print(convex_hull(points))
