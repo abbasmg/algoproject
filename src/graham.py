@@ -6,16 +6,14 @@ Created on Sun Nov 8 2020
 
 """
 pseudocode : Graham scan (wikipedia)
-let points be the list of points
-let stack = empty_stack()
-1. find the lowest y-coordinate and leftmost point, called P0
-2. sort points by polar angle with P0, if several points have the same polar angle then only keep the farthest
-3. for point in points:
-    # pop the last point from the stack if we turn clockwise to reach this point
-4.    while count stack > 1 and ccw(next_to_top(stack), top(stack), point) <= 0:
-        pop stack
-5.    push point to stack
-end
+•	Select the point with minimum 𝑦
+•	Sort all points in CCW order {𝑝0, 𝑝1, … , 𝑝𝑛}
+•	𝑆 = {𝑝0, 𝑝1}
+•	For 𝑖 = 2 to 𝑛
+o	    While |𝑆| > 2 && 𝑝𝑖 is to the right of 𝑆−2, 𝑆−1
+	        𝑆.pop
+o	    𝑆.push(𝑝𝑖)
+
 """
 import time
 import math
@@ -23,7 +21,7 @@ from math import atan2 # for computing polar angle
 from Coord import Point 
 
 """
-# 1. find the lowest y-coordinate and leftmost point, called P0
+# Select the point with minimum 𝑦
 """
 def lowest_y(points):
     miny = points[0].y
@@ -44,7 +42,7 @@ def euc_dist(p0,p1,p2):
     return d1, d2
 
 """
-# 2. sort points by polar angle with P0, if several points have the same polar angle then only keep the farthest
+# 2. Sort all points in CCW order {𝑝0, 𝑝1, … , 𝑝𝑛}
 """
 def polar_angle_sort(points,p0):
     sorted_angle = {}
@@ -83,11 +81,10 @@ def polar_angle_sort(points,p0):
     return sorted_points
 
 """
-3. for point in points:
-    # pop the last point from the stack if we turn clockwise to reach this point
-4.    while count stack > 1 and ccw(next_to_top(stack), top(stack), point) <= 0:
-        pop stack
-5.    push point to stack
+For 𝑖 = 2 to 𝑛
+o	    While |𝑆| > 2 && 𝑝𝑖 is to the right of 𝑆−2, 𝑆−1
+	        𝑆.pop
+o	    𝑆.push(𝑝𝑖)
 end
 """
 def convex_hull(points):

@@ -19,7 +19,6 @@ def random_points(points, n):
 
 
 def time_complexity(k_brute, k_divide, k):
-    points = []
     times_brute = []
     times_divide = []
     times_jarvis = []
@@ -28,7 +27,8 @@ def time_complexity(k_brute, k_divide, k):
     n_brute = []
     n_divide = []
 
-    for i in range(5,k_brute+5):
+    for i in range(5,k_brute,1):
+        points = []
         n_brute.append(i)
         random_points(points, i)
 
@@ -43,6 +43,7 @@ def time_complexity(k_brute, k_divide, k):
         print(i-4)
 
     for i in range(5,k_divide+5):
+        points = []
         n_divide.append(i)
         random_points(points, i)
 
@@ -57,6 +58,7 @@ def time_complexity(k_brute, k_divide, k):
         print(i-4)
 
     for i in range(5,k+5):
+        points = []
         n.append(i)
         random_points(points, i)
 
@@ -80,7 +82,7 @@ def time_complexity(k_brute, k_divide, k):
 
 
 
-n_brute, n_divide, n, times_brute, times_divide, times_jarvis, times_graham = time_complexity(20,90,90)
+n_brute, n_divide, n, times_brute, times_divide, times_jarvis, times_graham = time_complexity(0,0,0)
 
 # Plot brute algo ------------------
 fig, ax = plt.subplots()
@@ -127,4 +129,31 @@ ax.set(xlabel='No. of elements', ylabel='Time required',
 ax.grid()
 
 fig.savefig("graham.png")
+plt.show()
+
+
+
+# Plot convex polygon ------------------
+# this was manually done using the GUI
+times_convexpoly =[
+    0.005133,
+    0.00858129999997459,
+    0.008160400000008394,
+    0.007028600000012375,
+    0.011166000000002896,
+    0.007819600000004812,
+    0.015481300000033116,
+    0.012539199999991979,
+    0.017975700000022243,
+    0.017781899999988582
+]
+n_convpoly = range(5,55,5)
+fig, ax = plt.subplots()
+ax.plot(n_convpoly,times_convexpoly)
+
+ax.set(xlabel='No. of elements', ylabel='Time required',
+       title='Convex hull of simple polygon time complexity')
+ax.grid()
+
+fig.savefig("convPoly.png")
 plt.show()

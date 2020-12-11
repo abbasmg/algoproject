@@ -6,7 +6,7 @@ Created on Tue Dec  1 02:12:31 2020
 """
 
 from Coord import *
-
+import time
 
 
 
@@ -20,6 +20,7 @@ def isleft(points,L,x):
         return False
 
 def convex_poly(points):
+    tic = time.perf_counter()
     q = []
     L = []
     q.append(points[0])
@@ -59,6 +60,9 @@ def convex_poly(points):
         q.append(points[x])
         t = t+1
         y = (x-1)%n
+        
+        toc = time.perf_counter()
+    print("Processing time for convex polygon: " + str(toc-tic) + " seconds")
     return q
 
 
